@@ -49,3 +49,20 @@ threshold for differnces, lower is normal, higher is abnormal. The average of th
  6: 6506.915903462124}
 
 f1 score = 0.44
+
+
+- numPy approach using MSE in stead of pixel count on processed data.
+
+No more need for pixe thresholding but the differences in values are as follows:
+{29.618622778552197 53.085116873222304
+31.468391180038452 49.10497647456184
+38.14536787823933 50.26430692174555
+39.7240070785064 53.5197378646653
+44.042650235409766 55.036569421268204
+50.06285226605105 60.27051489050528}
+
+f1 score 0.61
+
+- numPy approach with adaptive threshold per class, heavily optimized by multiplying them to the optimal coefficient.
+
+f1 score 0.91
