@@ -1,5 +1,117 @@
-v0.1.
+---------------------------
+v0.3
+---------------------------
 
+Training model with SSIMloss in stead of BCE
+
+# build model
+
+# input size is (128, 128). That means the input is 16.384 floats. In the input below they have an input of 784.
+input_shape = (128, 128, 1)
+
+"""
+# This is the size of our encoded representations
+encoding_dim = 32  # 32 floats -> compression of factor 24.5, assuming the input is 784 floats
+"""
+
+# like the example above we takle encoding dimension as a factor 24
+encoding_dim = 668
+
+# This is our input image
+input_img = keras.Input(shape=input_shape)
+# "encoded" is the encoded representation of the input
+encoded = layers.Dense(encoding_dim, activation='relu')(input_img)
+# "decoded" is the lossy reconstruction of the input
+decoded = layers.Dense(1, activation='sigmoid')(encoded)
+
+# This model maps an input to its reconstruction
+autoencoder = keras.Model(input_img, decoded)
+
+# This model maps an input to its encoded representation
+encoder = keras.Model(input_img, encoded)
+
+# This is our encoded (32-dimensional) input
+encoded_input = keras.Input(shape=(encoding_dim,))
+# Retrieve the last layer of the autoencoder model
+decoder_layer = autoencoder.layers[-1]
+# Create the decoder model
+decoder = keras.Model(encoded_input, decoder_layer(encoded_input))
+
+autoencoder.compile(optimizer='adam', loss=SSIMloss)
+
+history = autoencoder.fit(train_data[:500], train_data[:500],
+                epochs=10,
+                batch_size=10,
+                shuffle=True,
+                validation_data=(val_data[:500], val_data[:500]),
+                callbacks=[TensorBoard(log_dir='/tmp/autoencoder')])
+
+# RESULTS
+
+SSIM 
+
+f1 = 0.7415730337078651
+Accuracy = 0.5892857142857143
+Precision = 1.0
+Recall = 0.5892857142857143
+
+---------------------------
+v0.2.
+---------------------------
+
+# build model
+
+# input size is (128, 128). That means the input is 16.384 floats. In the input below they have an input of 784.
+input_shape = (128, 128, 1)
+
+"""
+# This is the size of our encoded representations
+encoding_dim = 32  # 32 floats -> compression of factor 24.5, assuming the input is 784 floats
+"""
+
+# like the example above we takle encoding dimension as a factor 24
+encoding_dim = 668
+
+# This is our input image
+input_img = keras.Input(shape=input_shape)
+# "encoded" is the encoded representation of the input
+encoded = layers.Dense(encoding_dim, activation='relu')(input_img)
+# "decoded" is the lossy reconstruction of the input
+decoded = layers.Dense(1, activation='sigmoid')(encoded)
+
+# This model maps an input to its reconstruction
+autoencoder = keras.Model(input_img, decoded)
+
+# This model maps an input to its encoded representation
+encoder = keras.Model(input_img, encoded)
+
+# This is our encoded (32-dimensional) input
+encoded_input = keras.Input(shape=(encoding_dim,))
+# Retrieve the last layer of the autoencoder model
+decoder_layer = autoencoder.layers[-1]
+# Create the decoder model
+decoder = keras.Model(encoded_input, decoder_layer(encoded_input))
+
+autoencoder.compile(optimizer='adam', loss='binary_crossentropy')
+
+history = autoencoder.fit(train_data[:500], train_data[:500],
+                epochs=10,
+                batch_size=10,
+                shuffle=True,
+                validation_data=(val_data[:500], val_data[:500]),
+                callbacks=[TensorBoard(log_dir='/tmp/autoencoder')])
+
+# RESULTS
+
+BCE-loss
+f1 = 0.25
+Accuracy = 0.9518599562363238
+Precision = 0.34375
+Recall = 0.19642857142857142
+
+---------------------------
+v0.1.
+---------------------------
 # build model
 
 # input size is (128, 128). That means the input is 16.384 floats. In the input below they have an input of 784.
@@ -44,3 +156,8 @@ history = autoencoder.fit(train_data, train_data,
 
 # RESULTS
 
+BCE-loss
+f1 = 0.21978021978021978
+Accuracy = 0.9482129832239241
+Precision = 0.2857142857142857
+Recall = 0.17857142857142858
