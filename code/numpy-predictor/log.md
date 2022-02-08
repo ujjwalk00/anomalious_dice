@@ -61,7 +61,7 @@ No more need for pixe thresholding but the differences in values are as follows:
 44.042650235409766 55.036569421268204
 50.06285226605105 60.27051489050528}
 
-f1 score 0.61
+f1 score 0.86
 
 - numPy approach with adaptive threshold per class, heavily optimized by multiplying them to the optimal coefficient.
 
