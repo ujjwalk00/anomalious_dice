@@ -13,7 +13,12 @@ TEMPLATE_FOLDER = os.path.join(PROCESSED_DATA, "templates")
 
 
 def match_template(
-    input_path, template_path, category, method="pixel_count", debug_mode=False
+    input_path,
+    template_path,
+    category,
+    path=True,
+    method="pixel_count",
+    debug_mode=False,
 ):
     """
     function that matches the image to a template.
@@ -50,8 +55,12 @@ def match_template(
 
         stored_parameters = {1: 35, 2: 25, 3: 50, 4: 75, 5: 75, 6: 100}
 
-    # load in image and template
-    sample_image = cv2.imread(input_path, cv2.IMREAD_GRAYSCALE)
+    if path:
+        # load in image and template
+        sample_image = cv2.imread(input_path, cv2.IMREAD_GRAYSCALE)
+    else:
+        sample_image = np.array(input_path)
+
     template_image = cv2.imread(template_path, cv2.IMREAD_GRAYSCALE)
 
     if method == "pixel_count":
@@ -79,14 +88,15 @@ def match_template(
         return mse, None, None
 
 
-def numpy_model(image_path, thresholds=None):
+def numpy_model(image, path=True, thresholds=None):
     """
     predicts whether a dice is an anomaly or not
 
-    :image_path: str path to image file
+    :image: str path to image file
     :thresholds: dict containg custom thresholds foe each category, load it in from thresholds.pickle
     :return: return a predictions overall, and a prediction list as to what class it may belong
     """
+
     all_templates = ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png"]
 
     predicted = 0
@@ -107,7 +117,7 @@ def numpy_model(image_path, thresholds=None):
         template_path = os.path.join(TEMPLATE_FOLDER, template)
 
         errors, _, _ = match_template(
-            image_path, template_path, category=1, method="MSE"
+            image, template_path, path=path, category=1, method="MSE"
         )
         thresh = thresholds[idx + 1]
 
