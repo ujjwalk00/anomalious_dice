@@ -1,4 +1,28 @@
 ---------------------------
+v2.3x
+---------------------------
+
+variational auto encoder, basic model 
+
+# Create encoder
+encoder = keras.Model(inputs, [z_mean, z_log_sigma, z], name='encoder')
+
+# Create decoder
+latent_inputs = keras.Input(shape=(latent_dim,), name='z_sampling')
+x = layers.Dense(intermediate_dim, activation='relu')(latent_inputs)
+outputs = layers.Dense(original_dim, activation='sigmoid')(x)
+decoder = keras.Model(latent_inputs, outputs, name='decoder')
+
+# instantiate VAE model
+outputs = decoder(encoder(inputs)[2])
+vae = keras.Model(inputs, outputs, name='vae_mlp')
+
+0.7555555555555555,
+0.9691011235955056,
+0.8947368421052632,
+0.6538461538461539
+
+---------------------------
 v1.3x
 ---------------------------
 
