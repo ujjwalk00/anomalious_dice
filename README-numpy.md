@@ -6,9 +6,11 @@ If it falls within the boundaries of one of these it is calculated as a normal s
 
 But when a sample like this one is given: 
 
-![](processed_data/test_set/ano/17_11_21_anomalies_003.png)
+![](processed_data/test_set/ano/17_11_21_anomalies_005.png)
 
 ![](visuals/templates/1.png)|![](visuals/templates/2.png)|![](visuals/templates/3.png)|![](visuals/templates/4.png)|![](visuals/templates/5.png)|![](visuals/templates/6.png)
+:--------------------------:|:--------------------------:|:--------------------------:|:--------------------------:|:--------------------------:|:--------------------------:
+65.5125 > 62.0278047        |75.4151 > 60.43002574       |67.5423 >66.3072560999      |72.4521 > 69.9328087        |77.5124 > 74.3094147        |91.542 > 82.750025  
 :--------------------------:|:--------------------------:|:--------------------------:|:--------------------------:|:--------------------------:|:--------------------------:
 MSEloss > theshold 1        |MSEloss > theshold 2        |MSEloss > theshold 3        |MSEloss > theshold 4        |MSEloss > theshold 5        |MSEloss > theshold 6  
 
