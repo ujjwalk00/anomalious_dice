@@ -11,17 +11,6 @@
 
   `pip install -r requirements.txt`
 
-## Usage
-
-To run application with streamlit run main.py with below command.
-
-  `streamlit run main.py`
-
-Application will open in browser automatically or you can also find application url in terminal like below
-
-![](visuals/app_url.PNG)
-
-
 ## Preprocessing Data
 
 We started this project by looking at the data provided. The image dataset contains 6571 images
@@ -209,6 +198,16 @@ f1|0.7555555555555555
 Accuracy|0.9691011235955056
 Precision|0.8947368421052632
 Recall|0.6538461538461539
+
+## Usage
+
+To run application with streamlit run main.py with below command.
+
+  `streamlit run main.py`
+
+Application will open in browser automatically or you can also find application url in terminal like below
+
+![](visuals/app_url.PNG)
 
 # Demo
 
