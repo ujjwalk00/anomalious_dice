@@ -150,10 +150,9 @@ def load_image(img):
     return image[0]
 
 
-def load_image_opencv(img):
-    file_bytes = np.asarray(bytearray(img.read()), dtype=np.uint8)
-    opencv_image = cv2.imdecode(file_bytes, 1)
-    return opencv_image
+def load_image_opencv(pillow_img):
+    open_cv_image = np.array(pillow_img)
+    return open_cv_image
 
 
 # Uploading the File to the Page
