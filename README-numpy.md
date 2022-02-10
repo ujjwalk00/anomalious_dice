@@ -18,3 +18,11 @@ classified as an anomaly.
 
 Over the training data, an f1-score was reached of 0.90. Over the test data the f1 was 0.87.
 
+metric|score
+:--------------------------:|:--------------------------:
+f1|0.9051089462333606
+Accuracy|0.9051724137931034
+ROC|0.9053571428571427
+rand_score|00.8268365817091454
+
+f1 :  0.9051089462333606 acc :  0.9051724137931034 roc :  0.9053571428571427 rand :  0.8268365817091454
