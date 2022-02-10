@@ -35,8 +35,6 @@ In the following examples you can see that the anomalies are sometimes rotated i
 how normal dice are rotated. When comparing these values to the templates, we can immediately recognize a
 number of anomalies without any modeling.
 
-![](visuals/ano1.gif)
-![](visuals/ano2.gif)
 ![](visuals/ano3.gif)
 ![](visuals/ano4.gif)
 
