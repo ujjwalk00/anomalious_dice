@@ -22,33 +22,6 @@ Application will open in browser automatically or you can also find application 
 ![](visuals/app_url.PNG)
 
 
-# Demo
-
-After running the main.py file you will be directed to the streamlit web app where you can see user inputs for files.  
-Make sure the picture is in PNG/JPEG format with the shape of 128x128.
-
-![](visuals/input_file.PNG)
-
-You can find the dice images we are testing with on ```preprocessed_data``` directory and after selecting an image the output looks like this.
-
-![](visuals/example_1.PNG)
-
-On the first row you can see the input image and the reconstructed image done by autoencoder. As you know we trained the auto encoder with normal dice 
-so by the the time we feed anomalous dice to auto encoder it will have a significant loss. This example is with normal dice image and the SSIM loss function 
-returns fairly low value and our CNN model that's been trained with normal dice image only. It helps us identify which dice we are looking at. But that is not
-enough for anomaly detection let's try with an anomalous dice
-
-![](visuals/example_2.PNG)
-
-We can see there has been drawn some dots on the middle of the dice. Our SSIM loss function is giving a fairly low loss value and our CNN is identifying it as 
-dice 4. How can we make a validation whether it is anomalous or not? Take a look at following image
-
-![](visuals/explanation.PNG)
-
-After identifying which dice it is we are going to calculate the loss value between the input image and the template image of the predicted dice. The division between
-the first loss value and the second loss value is the key to detect anomalous dices. We are setting the treshold on 0.70, if it's above 0.70 then the similarity rate is
-high, meaning its a normal dice. When the ratio is below 0.70 then we identify it as a anomalous dice.
-
 ## Preprocessing Data
 
 We started this project by looking at the data provided. The image dataset contains 6571 images
@@ -143,8 +116,6 @@ MSEloss > thresh 1        |MSEloss > thresh 2        |MSEloss > thresh 3        
 And MSEloss for this sample falls outside of the boundaries for each category it is
 classified as an anomaly.
 
-Over the training data, an f1-score was reached of 0.90. Over the test data the f1 was 0.87.
-
 metric|score
 :--------------------------:|:--------------------------:
 f1|0.9051089462333606
@@ -154,8 +125,26 @@ rand_score|0.8268365817091454
 
 ### Autoencoder 
 
-For this approach we created Autoencoder with convolution layers.
+We chose to work with an autoencoder because we believed it would be suited to the
+task. Rather than using a Generative Adverserial Network we believed an Auto Encoder
+would not have to generate an image for each category.
+
+Not only that, but for this challenge it seemed like a novel approach.
+
+An autoencoder is a neural network used to learn efficient codings of unlabeled data. 
+The encoding is validated and refined by attempting to regenerate the input from the 
+encoding. The autoencoder learns a representation (encoding) for a set of data, 
+typically for dimensionality reduction, by training the network to ignore insignificant 
+data (“noise”). 
+
+![](visuals/AE.png)
+
+We tried several different architectures using between 1 and 3 dense layers, 2 to 3 
+convolutional layers and batch normalization.
+
+For the best approach we created Autoencoder with convolution layers.
 This is how it is regenerating images for orginal and anomalies.
+
 ![](visuals/autoencoder/img1.png)
 ![](visuals/autoencoder/img2.png)
 ![](visuals/autoencoder/img3.png)
@@ -221,6 +210,33 @@ Accuracy|0.9691011235955056
 Precision|0.8947368421052632
 Recall|0.6538461538461539
 
+# Demo
+
+After running the main.py file you will be directed to the streamlit web app where you can see user inputs for files.  
+Make sure the picture is in PNG/JPEG format with the shape of 128x128.
+
+![](visuals/input_file.PNG)
+
+You can find the dice images we are testing with on ```preprocessed_data``` directory and after selecting an image the output looks like this.
+
+![](visuals/example_1.PNG)
+
+On the first row you can see the input image and the reconstructed image done by autoencoder. As you know we trained the auto encoder with normal dice 
+so by the the time we feed anomalous dice to auto encoder it will have a significant loss. This example is with normal dice image and the SSIM loss function 
+returns fairly low value and our CNN model that's been trained with normal dice image only. It helps us identify which dice we are looking at. But that is not
+enough for anomaly detection let's try with an anomalous dice
+
+![](visuals/example_2.PNG)
+
+We can see there has been drawn some dots on the middle of the dice. Our SSIM loss function is giving a fairly low loss value and our CNN is identifying it as 
+dice 4. How can we make a validation whether it is anomalous or not? Take a look at following image
+
+![](visuals/explanation.PNG)
+
+After identifying which dice it is we are going to calculate the loss value between the input image and the template image of the predicted dice. The division between
+the first loss value and the second loss value is the key to detect anomalous dices. We are setting the treshold on 0.70, if it's above 0.70 then the similarity rate is
+high, meaning its a normal dice. When the ratio is below 0.70 then we identify it as a anomalous dice.
+
 ## Collaborators
 
-Design and construction phase of the project was made by 3 collaborators.([Ujjwal Kandel](https://github.com/UjjwalKandel2000), [Reena Koshta](https://github.com/reenakoshta10), and [Aubin](https://github.com/agilepydev))
+Design and construction phase of the project was made by 3 collaborators.([Ujjwal Kandel](https://github.com/UjjwalKandel2000), [Reena Koshta](https://github.com/reenakoshta10), and [Aubin](https://github.com/manwithplan))
