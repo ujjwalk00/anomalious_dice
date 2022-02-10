@@ -1,4 +1,4 @@
-# dice thing
+# Anomalous Dice
 
 ## Installation
 - Clone this repository into your local environment with below command-
