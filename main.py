@@ -61,7 +61,7 @@ def match_template(
         # load in image and template
         sample_image = cv2.imread(input_path, cv2.IMREAD_GRAYSCALE)
     else:
-        sample_image = np.array(input_path)
+        sample_image = input_path
 
     template_image = cv2.imread(template_path, cv2.IMREAD_GRAYSCALE)
 
