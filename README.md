@@ -134,9 +134,11 @@ convolutional layers and batch normalization.
 For the best approach we created Autoencoder with convolution layers.
 This is how it is regenerating images for orginal and anomalies.
 
-![](visuals/autoencoder/img1.png)
-![](visuals/autoencoder/img2.png)
-![](visuals/autoencoder/img3.png)
+![](visuals/autoencoder/test_org.png)
+![](visuals/autoencoder/test_resconst.png)
+![](visuals/autoencoder/ano_org.png)
+![](visuals/autoencoder/ano_reconst.png)
+
 
 metric|score
 :--------------------------:|:--------------------------:
